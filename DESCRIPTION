@@ -1,5 +1,5 @@
 Package: fastbmdR
-Title: Benchmark Dose Analysis of Omics Data.
+Title: Benchmark Dose Analysis of Omics Data
 Version: 0.0.0.9000
 Authors@R: 
     person("Jessica", "Ewald", , "1jess.ewald@gmail.com", role = c("aut", "cre"),
@@ -11,3 +11,10 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
 URL: https://github.com/jessica-ewald/fastbmdR
 BugReports: https://github.com/jessica-ewald/fastbmdR/issues
+Imports: 
+    data.table,
+    dplyr,
+    drc,
+    fgsea,
+    mdatools,
+    tidyverse
