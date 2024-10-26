@@ -1,6 +1,6 @@
 # fastbmdR
 
-`fastbmdR` is an R package designed for performing computationally-efficient dose-response analysis of omics data. 
+`fastbmdR` is an R package designed for performing computationally-efficient dose-response analysis of omics data. It's intial implementation in our [2019 publication in Bioinformatics](https://academic.oup.com/bioinformatics/article/37/7/1035/5881631). The fastbmd curve fitting functions are hosted in the [ExpressAnalyst webtool](https://www.expressanalyst.ca), and you can follow Basic Protocol 10 in [this publication](https://currentprotocols.onlinelibrary.wiley.com/doi/10.1002/cpz1.922) to learn how to use ExpressAnalyst for dose-response analysis.
 
 ## Installation
 
