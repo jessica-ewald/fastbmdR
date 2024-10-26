@@ -205,7 +205,7 @@ bmdres <- function(fit){
 #### lines from the alr3 source code in the CRAN archive. Functions were 
 #### minimally modified to not use S3 methods.
 
-pureErrorAnova.lm <- function(mod) {
+pureErrorAnova <- function(mod) {
   if (inherits(mod, "lm")) {
     if (is.null(mod$model)) mod <- update(mod, model=TRUE)
     p <- dim(mod$model)[2] -1
