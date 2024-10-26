@@ -24,7 +24,7 @@ library(fastbmdR)
 
 Load the example data and specify basic parameters:
 ```r
-load("example_data")
+data("example_data")
 models = c("Exp2","Exp3","Exp4","Exp5","Poly2","Lin","Power","Hill")
 dose = c(rep(0,5), rep(25,5), rep(100,5), rep(200,5), rep(300,5), rep(400,5))
 ncpus = 1
