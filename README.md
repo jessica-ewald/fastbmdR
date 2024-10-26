@@ -39,6 +39,6 @@ fitObj <- FilterDRFit(fitObj, lof.pval = 0.1, filt.var = "AIC.model")
 ```
 Finally, calculate the benchmark dose (BMD) for each curve fit. We also want to filter out low quality BMDs by only keeping those with the "all.pass" flag.
 ```r
-bmd.res <- PerformBMDCalc(fitObj, ncpus = ncpus, num.sds = 1, sample.mean = TRUE)
+bmd.res <- PerformBMDCalc(fitObj, ncpus = ncpus, num.sds = 1, bmr.method = "sample.mean")
 bmd.pass <- bmd.res[bmd.res$all.pass,]
 ```
