@@ -1,0 +1,11 @@
+Package: fastbmdR
+Title: Perform Dose-Response Analysis of Omics Data
+Version: 0.0.0.9000
+Authors@R: 
+    person("Jessica", "Ewald", , "1jess.ewald@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-7555-736X"))
+Description: fastbmdR is a computationally efficient implementation of dose-response analysis, designed for analyzing omics data. fastbmdR was originally implemented as a fast, R-based version of the NTP's recommended approach to genomic dose-response analysis that was compatible with the web-based tool www.fastbmd.ca (now hosted at www.expressanalyst.ca). Since the initial implementation in 2019, the core functions have been modified with additional options to support  analysis in specific scenarios, for example when there are low replicate numbers or when analyzing image-based morphology profiles with many correlated features. 
+License: `use_mit_license()`
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
