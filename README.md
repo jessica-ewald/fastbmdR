@@ -1,9 +1,6 @@
 # fastbmdR
-Perform dose-response analysis of omics data
 
-# fastbmdR
-
-`fastbmdR` is an R package designed for performing dose-response analysis of omics data. 
+`fastbmdR` is an R package designed for performing computationally-efficient dose-response analysis of omics data. 
 
 ## Installation
 
