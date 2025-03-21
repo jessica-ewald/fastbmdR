@@ -3,8 +3,7 @@
 #' This function plots both the observed data points and the fitted curve for
 #' one feature in the fitres.filt dataframe in a fitObj.
 #'
-#' @importFrom ggplot ggplot geom_point geom_line geom_vline xlab ylab xlim
-#' @importFrom ggplot theme theme_bw aes element_text
+#' @import ggplot2
 #' @param feature A `character` specifying which feature to plot a curve for.
 #' @param fitObj A `fitObj` containing the curve fits and data.
 #' @param dose_spacing A `character` specifying the scale of the dose range.
