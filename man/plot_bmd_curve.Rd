@@ -11,9 +11,11 @@ plot_bmd_curve(feature, fitObj, dose_spacing = "natural", return_type = "plot")
 
 \item{fitObj}{A \code{fitObj} containing the curve fits and data.}
 
-\item{dose_spacing}{A \code{character} specifying the scale of the dose range.}
+\item{dose_spacing}{A \code{character} specifying the scale of the dose range.
+Possible values are 'natural', 'log10', and 'log2'.}
 
-\item{return_type}{A \code{character} specifying the return data format.}
+\item{return_type}{A \code{character} specifying the return data format.
+Possible values are 'plot', 'plot.object', and 'plot.data'.}
 }
 \value{
 Either a plot, ggplot grob, or dataframe.

@@ -7,7 +7,9 @@
 #' @param feature A `character` specifying which feature to plot a curve for.
 #' @param fitObj A `fitObj` containing the curve fits and data.
 #' @param dose_spacing A `character` specifying the scale of the dose range.
+#' Possible values are 'natural', 'log10', and 'log2'.
 #' @param return_type A `character` specifying the return data format.
+#' Possible values are 'plot', 'plot.object', and 'plot.data'.
 #' @return Either a plot, ggplot grob, or dataframe.
 #' @export
 plot_bmd_curve <- function(feature,
