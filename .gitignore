@@ -84,3 +84,7 @@ packrat/src/
 packrat/packrat.lock
 packrat/.Rprofile
 
+# Test results
+test/*.png
+.pdf
+

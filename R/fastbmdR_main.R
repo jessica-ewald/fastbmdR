@@ -18,7 +18,7 @@
 #' executed in parallel by specifying 'ncpus'. It returns 'fitObj', a list that
 #' includes the input data and the curve fit results.
 #'
-#' @importFrom parallel makeCluster parSapply stopCluster
+#' @importFrom parallel makeCluster parSapply stopCluster parLapply
 #' @importFrom drc neill.test
 #' @param data A `data.frame` with omics features in rows and sample in columns.
 #' @param dose A `c()` containing the dose associated with each sample in data.
@@ -29,7 +29,9 @@
 PerformCurveFitting <- function(data,
                                 dose,
                                 ncpus = 1,
-                                models = c("Exp2","Exp3","Exp4","Exp5","Lin","Poly2","Hill","Power")) {
+                                models = c("Exp2", "Exp3", "Exp4",
+                                           "Exp5", "Lin", "Poly2",
+                                           "Hill", "Power")) {
 
   model_choices <- c("Exp2", "Exp3", "Exp4", "Exp5", "Lin",
                      "Poly2", "Poly3", "Poly4", "Hill", "Power")
@@ -49,7 +51,7 @@ PerformCurveFitting <- function(data,
   calcmean <- function(i) {
     tapply(tdata[, i], dose, mean, na.rm = TRUE)
   }
-  s <- sapply(1:nrow(data), calcmean)
+  s <- sapply(seq_len(nrow(data)), calcmean)
   data_mean <- as.matrix(t(s))
 
   # calculations for starting values and other uses
@@ -95,9 +97,9 @@ PerformCurveFitting <- function(data,
 
     ################## Exp2 fit ##########################
     if (keep_exp2) {
-      startExp2 <- startvalExp2(xm = doseu, ym = signalm)
+      start_exp2 <- startvalExp2(xm = doseu, ym = signalm)
       Exp2 <- suppressWarnings(try(nls(formExp2,
-                                       start = startExp2,
+                                       start = start_exp2,
                                        data = dset,
                                        lower = c(0, -Inf),
                                        algorithm = "port"),
@@ -130,9 +132,9 @@ PerformCurveFitting <- function(data,
 
     ################## Exp3 fit ##########################
     if (keep_exp3) {
-      startExp3 <- startvalExp3(xm = doseu, ym = signalm)
+      start_exp3 <- startvalExp3(xm = doseu, ym = signalm)
       Exp3 <- suppressWarnings(try(nls(formExp3,
-                                       start = startExp3,
+                                       start = start_exp3,
                                        data = dset,
                                        lower = c(0, -Inf, -Inf),
                                        algorithm = "port"),
@@ -166,18 +168,18 @@ PerformCurveFitting <- function(data,
     }
     ################## Exp4 fit ##########################
     if (keep_exp4) {
-      startExp4 <- startvalExp4(xm = doseu, ym = signalm, ad.dir = adv_incr)
+      start_exp4 <- startvalExp4(xm = doseu, ym = signalm, ad.dir = adv_incr)
 
       if (adv_incr) {
         Exp4 <- suppressWarnings(try(nls(formExp4,
-                                         start = startExp4,
+                                         start = start_exp4,
                                          data = dset,
                                          lower = c(1, 0, 1),
                                          algorithm = "port"),
                                      silent = TRUE))
       } else {
         Exp4 <- suppressWarnings(try(nls(formExp4,
-                                         start = startExp4,
+                                         start = start_exp4,
                                          data = dset,
                                          lower = c(1, 0, 0),
                                          upper = c(Inf, Inf, 1),
@@ -213,18 +215,18 @@ PerformCurveFitting <- function(data,
     }
     ################## Exp5 fit ##########################
     if (keep_exp5) {
-      startExp5 <- startvalExp5(xm = doseu, ym = signalm, ad.dir = adv_incr)
+      start_exp5 <- startvalExp5(xm = doseu, ym = signalm, ad.dir = adv_incr)
 
       if (adv_incr) {
         Exp5 <- suppressWarnings(try(nls(formExp5,
-                                         start = startExp5,
+                                         start = start_exp5,
                                          data = dset,
                                          lower = c(1, 0, 1, 1),
                                          algorithm = "port"),
                                      silent = TRUE))
       } else {
         Exp5 <- suppressWarnings(try(nls(formExp5,
-                                         start = startExp5,
+                                         start = start_exp5,
                                          data = dset,
                                          lower = c(1, 0, 0, 1),
                                          upper = c(Inf, Inf, 1, Inf),
@@ -260,13 +262,13 @@ PerformCurveFitting <- function(data,
 
     ################## Power fit ##########################
     if (keep_pow) {
-      startPow <- startvalPow(xm = doseu,
+      start_pow <- startvalPow(xm = doseu,
                               ym = signalm,
                               ad.dir = adv_incr,
                               dset = dset)
 
       Pow <- suppressWarnings(try(nls(formPow,
-                                      start = startPow,
+                                      start = start_pow,
                                       data = dset,
                                       lower = c(1, -Inf, 0.999),
                                       upper = c(Inf, Inf, 18),
@@ -302,13 +304,13 @@ PerformCurveFitting <- function(data,
 
     ################## Hill fit ##########################
     if (keep_hill) {
-      startHill <- startvalHillnls2(x = dose,
+      start_hill <- startvalHillnls2(x = dose,
                                     y = signal,
                                     xm = doseu,
                                     ym = signalm,
                                     increase = adv_incr)
       Hill <- suppressWarnings(try(nls(formHill,
-                                       start = startHill,
+                                       start = start_hill,
                                        data = dset, 
                                        lower = c(0, -Inf, -Inf, 0),
                                        algorithm = "port"),
@@ -486,8 +488,8 @@ PerformCurveFitting <- function(data,
 #'
 #' @import data.table
 #' @param fitObj A `fitObj` object created by PerformCurveFitting.
-#' @param lof.pval A `numeric` object that specifies the lack-of-fit p-value threshold.
-#' @param filt.var A `character` object that specifies the variable used for selecting the best curve fit.
+#' @param lof.pval A `numeric` that specifies the lack-of-fit p-value threshold.
+#' @param filt.var A `character` that specifies how to select the best fit.
 #' @return An updated `fitObj` object with filtered curve fits.
 #' @export
 FilterDRFit <- function(fitObj, lof.pval = 0.1, filt.var = "AIC.model") {
@@ -536,13 +538,13 @@ FilterDRFit <- function(fitObj, lof.pval = 0.1, filt.var = "AIC.model") {
 #' Various BMD QA/QC metrics are computed to assess BMD uncertainty. This
 #' function returns a dataframe with the BMD fit results.
 #'
-#' @importFrom parallel makeCluster parSapply stopCluster
+#' @importFrom parallel makeCluster parSapply stopCluster parLapply
 #' @param fitObj A `fitObj` object from FilterDRFit.
 #' @param ncpus An `int` specifying the number of cpus to use in parallel.
 #' @param num.sds A `numeric` specifying the number of std to define the BMR.
 #' @param bmr.method A `character` specifying the BMR definition method.
 #' @param log10.dose A `logical` specifying whether the dose is on a log scale.
-#' @return A `data.frame` with curve fit and BMD results.
+#' @return A `fitObjFiltBMD` with BMD results.
 #' @export
 PerformBMDCalc <- function(fitObj, ncpus = 1, num.sds = 1,
                            bmr.method = "sample.mean", log10.dose = FALSE)
@@ -560,7 +562,6 @@ PerformBMDCalc <- function(fitObj, ncpus = 1, num.sds = 1,
 
   # get necessary data for fitting
   dose <- fitObj$dose
-  doseranks <- as.numeric(as.factor(dose))
   data <- fitObj$data
   data_mean <- fitObj$data_mean
 
@@ -582,7 +583,6 @@ PerformBMDCalc <- function(fitObj, ncpus = 1, num.sds = 1,
   }
 
   item <- fitObj$fitres.filt[, 1]
-  fitres.bmd <- fitObj$fitres.filt
 
   # define BMR using either mean of controls or model evaluated at zero
   if(bmr.method == "sample.mean") {
@@ -826,7 +826,10 @@ PerformBMDCalc <- function(fitObj, ncpus = 1, num.sds = 1,
                      by.x = "gene.id",
                      by.y = "id")
 
-  return(dnld_file)
+  fitObj$bmd_res <- dnld_file
+  res <- structure(fitObj, class = "fitObjFiltBMD")
+
+  return(res)
 
 }
 
