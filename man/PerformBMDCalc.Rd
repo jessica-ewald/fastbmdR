@@ -17,14 +17,14 @@ PerformBMDCalc(
 
 \item{ncpus}{An \code{int} specifying the number of cpus to use in parallel.}
 
-\item{num.sds}{A \code{numeric} specifying the number of standard deviations to define the BMR.}
+\item{num.sds}{A \code{numeric} specifying the number of std to define the BMR.}
 
 \item{bmr.method}{A \code{character} specifying the BMR definition method.}
 
 \item{log10.dose}{A \code{logical} specifying whether the dose is on a log scale.}
 }
 \value{
-A \code{data.frame} with curve fit and BMD results.
+A \code{fitObjFiltBMD} with BMD results.
 }
 \description{
 This function computes the benchmark dose (BMD) for each curve fit. The BMD

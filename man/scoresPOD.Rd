@@ -13,9 +13,9 @@ scoresPOD(dat, dose, log10.dose = FALSE, num.sds = 1, filt.var = "AIC.model")
 
 \item{log10.dose}{A \code{logical} specifying whether the dose is on a log scale.}
 
-\item{num.sds}{A \code{numeric} specifying the number of standard deviations to define the BMR.}
+\item{num.sds}{A \code{numeric} specifying the number of std to define the BMR.}
 
-\item{filt.var}{A \code{character} that specifies the variable used for selecting the best curve fit.}
+\item{filt.var}{A \code{character} that specifies how to select the best fit.}
 }
 \value{
 A \code{data.frame} with curve fit and BMD results.

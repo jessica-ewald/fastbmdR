@@ -2,7 +2,14 @@
 % Please edit documentation in R/fastbmdR_main.R
 \name{PerformCurveFitting}
 \alias{PerformCurveFitting}
-\title{PerformCurveFitting}
+\title{Structure of "PerformCurveFitting" based on source code of DROmics.
+Specific model fits (other than Hill model);
+BMD calculation function; and modifications
+made throughout to be consistent with NTP approach for
+dose-response modeling, but
+consider citing: https://pubs.acs.org/doi/10.1021/acs.est.8b04752
+Some methods from here: https://doi.org/10.1371/journal.pone.0146021
+PerformCurveFitting}
 \usage{
 PerformCurveFitting(
   data,
@@ -21,7 +28,7 @@ PerformCurveFitting(
 \item{models}{A \code{c()} of model names to use for curve fitting.}
 }
 \value{
-A \code{fitObj} object containing the input data and curve fitting results.
+A \code{fitObj} object containing input data and curve fit results.
 }
 \description{
 This function fits the selected models for every feature in the input 'data'

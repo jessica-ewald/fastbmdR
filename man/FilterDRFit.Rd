@@ -9,9 +9,9 @@ FilterDRFit(fitObj, lof.pval = 0.1, filt.var = "AIC.model")
 \arguments{
 \item{fitObj}{A \code{fitObj} object created by PerformCurveFitting.}
 
-\item{lof.pval}{A \code{numeric} object that specifies the lack-of-fit p-value threshold.}
+\item{lof.pval}{A \code{numeric} that specifies the lack-of-fit p-value threshold.}
 
-\item{filt.var}{A \code{character} object that specifies the variable used for selecting the best curve fit.}
+\item{filt.var}{A \code{character} that specifies how to select the best fit.}
 }
 \value{
 An updated \code{fitObj} object with filtered curve fits.
