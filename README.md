@@ -48,6 +48,10 @@ Finally, plot some example curves.
 plot_bmd_curve("286989", fit_obj)
 plot_bmd_curve("116636", fit_obj)
 ```
+<img width="250" alt="image" src="https://github.com/user-attachments/assets/371b281b-0b77-4c2d-8b71-8f9e95cf8bd2" />
+&nbsp;&nbsp;&nbsp;&nbsp;
+<img width="250" alt="image" src="https://github.com/user-attachments/assets/30a9a605-6624-482c-882c-6b8279492260" />
+
 
 ## Testing
 If changes are made to the fastbmdR_main.R or fastbmdR_utils.R, run `Rscript test/test.R` from the root fastbmdR directory.
