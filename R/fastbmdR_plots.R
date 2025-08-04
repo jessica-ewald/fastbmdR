@@ -66,7 +66,7 @@ plot_bmd_curve <- function(feature,
                 "Exp4" = Exp4(b, c, d, e, f, x),
                 "Exp5" = Exp5(b, c, d, e, f, x),
                 "Hill" = Hill(b, c, d, e, f, x),
-                "Pow" = Pow(b, c, d, e, f, x),
+                "Power" = Pow(b, c, d, e, f, x),
                 "Poly2" = Poly2(b, c, d, e, f, x),
                 "Lin" = Lin(b, c, d, e, f, x))
   plot.interp <- data.frame(x = x, f_x = f_x)
